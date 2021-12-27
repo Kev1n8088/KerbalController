@@ -1,4 +1,4 @@
-Hardware:
+**Hardware:**
 
 Raspberry Pi doesn’t have analog inputs. Solution: Used Arduino to act as a ADC
 
@@ -12,7 +12,7 @@ High stress on Throttle signal cable. Solution: Added extension cable
 
 No extra mouse and keyboard available, as I would need to seal up the Raspberry Pi. Solution: Bought a USB hub to route the cables outside
 
-Software:
+**Software:**
 
 Have to communicate with an Arduino from a Raspberry Pi. Solution: Used Serial link
 

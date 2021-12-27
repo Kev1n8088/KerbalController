@@ -1,13 +1,17 @@
 Kerbal Controller Project Log
 
-Abstract
+Abstract:
+
 The goal is to create a controller that can be used to play a space game/simulation known as Kerbal Space Program. This particular plan details the third iteration of the project. 
 
 Significant differences from previous iterations include the switch from Arduino to Raspberry Pi as the processor (although we do still have an Arduino for Analog Input), the inclusion of a configurable 13 inch 1080P touchscreen, and the relatively large size of the controller. The software integration of the touchscreen is still under development. 
 
 We use a plugin to the game called KRPC. Originally designed to allow external programs to control the game via various different scripts, we used it’s networking features to allow the controller to wirelessly connect to the game via LAN. The digital buttons are directly connected to the RPI, while the analog throttle and joysticks are connected via an Arduino that interprets the signals and relays it to the RPI via serial link, as the RPI does not have analog inputs. To lower latency, the digital and analog scripts on the RPI are two different programs that are connected to the same game, another feature of KRPC. An external USB hub allows the connection of a keyboard and mouse, and the touchscreen allows for debugging without opening up the controller. 
 
+
+
 Day to Day Log
+
 
 Nov 14 (2020):
 
@@ -15,15 +19,18 @@ Pt1. Reobtained items, convened with a Python tutor about UI design. Turns out t
 
 Pt2. Reviewed old solder work, and tested switch connections. Realized that our soldering was wrong because of the possibility of shorting when pulling down switches, and we were forced to rewired the entire GND wire network.
 
+
 Nov 15: 
 
 Pt1. Finished wiring digital switches and did preliminary testing on switches. Due to some power issues, some switches failed. Reconfigured it, and switches worked. Applied hot glue to small switch connections to prevent shorting.
 	
 Pt2. Did preliminary testing on connection with KSP. Downlink is perfect, uplink shows promise.
 
+
 Nov 16-Nov 18:
 
 Did KSP uplink testing. Adjusted and is now mostly perfect. Stage, abort, arm, RCS, and SAS now working. RCS switch is intermittent, doing testing to find the problem. 
+
 
 Nov 19:
 
@@ -38,9 +45,11 @@ Pt1. Research on comms between Arduino and RPI yield some results. The easiest w
 
 Pt2. Serial over USB seems the most viable, due to it not requiring and GPIO ports and is the simplest for 2-way comms.
 	
+	
 Nov 24:
 	
 Pt1. Was able to finish programming most switches on the RPI, but due to the lack of a computer at this moment, I was not able to get a comms protocol started, as I am unable to program an Arduino with just an RPI
+
 
 Nov 28:
 	
@@ -50,11 +59,13 @@ Pt2: Counterintuitively, by slowing down the output from the Arduino, it allowed
 	
 Pt3: Oddly, there doesn’t seem to be enough power to supply the joysticks, they are showing erratic results when many axes are connected together. I have Connected each axis to a separate power and ground pin on the Arduino. That seems to have fixed the problem. Still unsure why this is, it could have been caused by the low throughput of an individual breadboard strip. 
 
+
 Nov 29:
 	
 Pt1: Connected 3 other axes. Lag is back. Adjusted delay to be 400ms. Fixed the issue
 	
 Pt2: Connected all wires for all buttons, now need programming.
+
 
 Dec 5: 
 	
@@ -62,17 +73,21 @@ Pt1: Finished connections and programming for ALL switches. All confirmed to be 
 	
 Pt2: UI complete, all connected to KRPC module. Software and switches officially finished. Need to order wood boards to finish enclosure.
 
+
 Dec 6:
 	
 Pt1: Ordered wood boards. 60 yuan each, for a total of 180 yuan. Awaiting delivery
+
 
 Dec 9:
 	
 Pt1: Wood boards arrived. In pristine condition.
 
+
 Dec 12:
 	
 Pt1: Planned to go to the workshop, due to short notice Lee is unavailable.
+
 
 Dec 13: 
 	
@@ -88,7 +103,10 @@ Pt5: Everything is placed in their respective positions. We needed a USB hub, so
 	
 Pt6: Arrived home, opened top. 2 cables that were under tension have been dislodged. Connected extension cable to relieve stress. Also connected Arduino to the USB hub instead of directly to the RPI for easy access.
 
+
+
 Kerbal Controller Build Guide
+
 
 Parts List: 
 
@@ -131,6 +149,7 @@ Zip ties
 	
 Total: ~1400 Yuan
 
+
 Tools List:
 
 Multimeter
@@ -145,6 +164,7 @@ Laser cutter
 
 Computer
 
+
 Build Guide:
 
 Adjust front panel files to the dimensions of the parts purchased
@@ -156,7 +176,6 @@ Install all switches, joysticks, and displays.
 Connect the red 18 gauge cable to the NO pin of the toggle switches, the safety switches, and the big button 
 
 Connect the black 18 gauge cable to the NC pin of the toggle switches and the big button, and the GND pin of the safety switches, and the - Pin of the big button LED
-
 
 Connect the red 22 gauge cable to the NO pin of one of the toggle switches, and also to all the NO pins of the pushbuttons
 
@@ -190,18 +209,26 @@ Glue all panels in their respective positions
 
 Tape top panel onto bottom panels, making sure all cables go where they should go.
 
+
+
 Kerbal Controller Software Guide
+
 
 Raspberry Pi: 
 	
 Switch Program: We first set the input and output. Then, for toggle switches, we simply set the variable we are controlling in KRPC to equal the output of the toggle switches. For the push buttons, it’s a bit more complicated. We flip the value of the variable, but in order to make sure that we don’t flip it over and over due to a prolonged press, we have an internal variable that stores whether the button has been pressed. This variable is reset when the button is released, and only if the variable is false do we switch the value. The LEDs are simply driven by the state of the various values they are connected to.
 
 Analog Program: We read the message sent by the Arduino, and then map that value to a number between -1 and 1. We then use that number to set the value of the respective controls. 
+
+
 Arduino: 
 	
 The Arduino simply sends analog data from the joysticks via a serial link to the raspberry pi, adjusting some values to account for noise. Nothing special here. 
 
+
+
 Kerbal Controller: Issues
+
 
 Hardware: 
 
@@ -216,6 +243,7 @@ Top panel sags when supported on 4 sides. Solution: Internal support panel with 
 High stress on Throttle signal cable. Solution: Added extension cable
 
 No extra mouse and keyboard available, as I would need to seal up the Raspberry Pi. Solution: Bought a USB hub to route the cables outside
+
 
 Software: 
 

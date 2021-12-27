@@ -1,4 +1,4 @@
-Build Guide:
+**Build Guide:**
 
 Adjust front panel files to the dimensions of the parts purchased
 

@@ -1,4 +1,4 @@
-Abstract:
+**Abstract:**
 
 The goal is to create a controller that can be used to play a space game/simulation known as Kerbal Space Program. This particular plan details the third iteration of the project.
 

@@ -1,4 +1,4 @@
-Parts List:
+#Parts List:
 
 Raspberry PI 3B+ with enclosure, cooling fan, and power cable
 
@@ -38,7 +38,7 @@ Zip ties
 
 Total: ~1400 Yuan
 
-Tools List:
+#Tools List:
 
 Multimeter
 

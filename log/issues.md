@@ -1,3 +1,5 @@
+**Issues:**
+
 **Hardware:**
 
 Raspberry Pi doesn’t have analog inputs. Solution: Used Arduino to act as a ADC

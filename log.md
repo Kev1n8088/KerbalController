@@ -41,6 +41,9 @@ Pt2. Tested analog throttle and joystick connections with Arduino. Throttle and 
 Pt3. Soldered all analog connections, added VCC and GND to a breadboard for easier routing.
 Nov 21-22:
 
+
+Nov 21-22:
+
 Pt1. Research on comms between Arduino and RPI yield some results. The easiest way seems to be either I2C or Serial.
 
 Pt2. Serial over USB seems the most viable, due to it not requiring and GPIO ports and is the simplest for 2-way comms.
